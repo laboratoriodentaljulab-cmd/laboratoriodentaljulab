@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      maxWidth: {
+        'content': '80rem',   /* 1280px - más ancho que 6xl */
+        'content-wide': '90rem', /* 1440px */
+      },
       colors: {
         dental: {
           50: '#f0fdfa',

@@ -4,19 +4,19 @@ export default function Nosotros() {
   return (
     <>
       <section className="relative bg-gradient-to-br from-dental-600/10 via-white to-dental-500/10 py-14 sm:py-20 md:py-24 w-full min-w-0 overflow-hidden">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full min-w-0">
+        <div className="max-w-content-wide mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 text-center w-full min-w-0">
           <p className="text-dental-600 font-semibold text-sm uppercase tracking-wider">Sobre nosotros</p>
           <h1 className="mt-2 text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 break-words">
             JULAB S.L.
           </h1>
           <p className="mt-4 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto">
-            Laboratorio dental de especialización técnica. Identidad, filosofía y marco ético.
+            Laboratorio dental especializado · Ortopedia maxilar · Aparatos funcionales
           </p>
         </div>
       </section>
 
       <section className="py-14 sm:py-20 md:py-24 w-full min-w-0">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full min-w-0 space-y-16">
+        <div className="max-w-content-wide mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 w-full min-w-0 space-y-16">
           <article className="rounded-2xl bg-white border border-slate-200/80 shadow-lg shadow-slate-200/50 p-6 sm:p-8 md:p-10 min-w-0">
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-5 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-dental-100 text-dental-600 flex items-center justify-center text-sm font-bold">1</span>

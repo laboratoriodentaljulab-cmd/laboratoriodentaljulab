@@ -1,5 +1,12 @@
 import { Link } from 'react-router-dom'
 import { Beaker, Shield, MessageSquare, Scale } from 'lucide-react'
+import Carousel from '../components/Carousel'
+
+const carouselImages: string[] = [
+  '/carrusel/c1.jpg',
+  '/carrusel/c2.jpg',
+  '/carrusel/c3.jpg',
+]
 
 export default function Home() {
   const valores = [
@@ -12,15 +19,14 @@ export default function Home() {
   return (
     <>
       <section className="relative bg-gradient-to-br from-dental-600 to-dental-800 text-white overflow-hidden w-full min-w-0">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-28 relative w-full min-w-0">
+        <div className="max-w-content-wide mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-12 sm:py-16 md:py-20 lg:py-28 relative w-full min-w-0">
           <div className="max-w-2xl w-full min-w-0">
-            <p className="text-dental-200 text-xs sm:text-sm font-medium uppercase tracking-wider mb-3 sm:mb-4">Laboratorio Dental de Especialización Técnica</p>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight break-words">JULAB S.L.</h1>
-            <p className="mt-4 sm:mt-6 text-base sm:text-lg md:text-xl text-dental-100 break-words">
-              Desarrollamos soluciones funcionales, ortopédicas y protésicas desde el conocimiento, la experiencia y el respeto por la biología del sistema estomatognático.
+            <p className="mt-4 sm:mt-5 text-base sm:text-lg md:text-xl text-dental-100 uppercase tracking-wide font-medium break-words">
+              Laboratorio dental especializado
             </p>
-            <p className="mt-3 text-sm sm:text-base text-dental-200 break-words">
-              No trabajamos en serie. Cada trabajo es único y definido por el profesional prescriptor.
+            <p className="mt-1 text-base sm:text-lg md:text-xl text-dental-100 uppercase tracking-wide font-medium break-words">
+              Ortopedia maxilar · Aparatos funcionales
             </p>
             <div className="mt-8 sm:mt-10 flex flex-col xs:flex-row flex-wrap gap-3 sm:gap-4">
               <Link to="/servicios" className="inline-flex items-center justify-center gap-2 bg-white text-dental-700 px-5 py-3 sm:px-6 sm:py-3 rounded-xl font-semibold hover:bg-dental-50 transition-colors text-center min-h-[44px]">
@@ -34,8 +40,14 @@ export default function Home() {
         </div>
       </section>
 
+      <Carousel
+        images={carouselImages}
+        interval={5000}
+        className="py-8 sm:py-12 md:py-16 bg-slate-50"
+      />
+
       <section className="py-10 sm:py-16 md:py-24 bg-white w-full min-w-0">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full min-w-0">
+        <div className="max-w-content-wide mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 w-full min-w-0">
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 px-1">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 break-words">Nuestros pilares</h2>
             <p className="mt-3 sm:mt-4 text-slate-600 text-sm sm:text-base">La biología guía cada decisión técnica.</p>
@@ -55,7 +67,7 @@ export default function Home() {
       </section>
 
       <section className="py-10 sm:py-16 md:py-24 bg-slate-50 w-full min-w-0">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full min-w-0">
+        <div className="max-w-content-wide mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 w-full min-w-0">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div className="min-w-0 order-2 lg:order-1">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 break-words">Identidad y propósito</h2>
@@ -81,7 +93,7 @@ export default function Home() {
       </section>
 
       <section className="py-12 sm:py-16 md:py-24 bg-dental-600 text-white w-full min-w-0">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full min-w-0">
+        <div className="max-w-content-wide mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 text-center w-full min-w-0">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold break-words px-2">¿Tiene un caso o necesita presupuesto?</h2>
           <p className="mt-3 sm:mt-4 text-dental-100 max-w-xl mx-auto text-sm sm:text-base break-words px-2">
             Estamos en Murcia. Contacte por teléfono o envíenos su consulta.

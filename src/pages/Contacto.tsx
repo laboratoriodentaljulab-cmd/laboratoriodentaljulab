@@ -17,7 +17,7 @@ export default function Contacto() {
   return (
     <>
       <section className="bg-gradient-to-b from-dental-50 to-white py-12 sm:py-16 md:py-20 w-full min-w-0">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full min-w-0">
+        <div className="max-w-content-wide mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 text-center w-full min-w-0">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 break-words px-2">Contacto</h1>
           <p className="mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg text-slate-600 max-w-2xl mx-auto break-words px-2">
             Estamos en Murcia, España. Solicite presupuesto, envíe sus trabajos o consulte plazos.
@@ -26,7 +26,7 @@ export default function Contacto() {
       </section>
 
       <section className="py-12 sm:py-16 md:py-24 w-full min-w-0">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full min-w-0">
+        <div className="max-w-content-wide mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 w-full min-w-0">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
             <div className="lg:col-span-1 space-y-5 sm:space-y-6 min-w-0">
               <div className="flex items-start gap-3 sm:gap-4">
