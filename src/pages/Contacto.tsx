@@ -1,23 +1,53 @@
 import { useState } from 'react'
-import { Phone, MapPin, Send, Clock } from 'lucide-react'
+import { Phone, MapPin, Send, Clock, AlertCircle } from 'lucide-react'
 
 const DIRECCION = 'Plaza Puerta Nueva, 3 · 4ª Escalera – Entresuelo A · 30001 Murcia'
 const TELEFONO = '968 93 11 39'
 const MOVIL = '689 41 18 06'
 const MAPA_URL = 'https://www.google.com/maps?q=Plaza+Puerta+Nueva+3,+30001+Murcia,+España&output=embed'
 
+/* Formspree: https://formspree.io/f/mgozgelb — los mensajes llegan al correo configurado allí. */
+const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID || 'mgozgelb'
+
 export default function Contacto() {
   const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSent(true)
+    if (!FORMSPREE_ID) {
+      setError('Formulario no configurado. Añade VITE_FORMSPREE_ID en Vercel (Settings → Environment Variables).')
+      return
+    }
+    setError(null)
+    setSending(true)
+    const form = e.currentTarget
+    const body = new FormData(form)
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        body,
+        headers: { Accept: 'application/json' },
+      })
+      if (res.ok) {
+        setSent(true)
+        form.reset()
+      } else {
+        const data = await res.json().catch(() => ({}))
+        setError(data.error || 'Error al enviar. Inténtelo de nuevo.')
+      }
+    } catch {
+      setError('Error de conexión. Inténtelo de nuevo.')
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
     <>
       <section className="bg-gradient-to-b from-dental-50 to-white py-12 sm:py-16 md:py-20 w-full min-w-0">
-        <div className="max-w-content-wide mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 text-center w-full min-w-0">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 text-center w-full min-w-0">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 break-words px-2">Contacto</h1>
           <p className="mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg text-slate-600 max-w-2xl mx-auto break-words px-2">
             Estamos en Murcia, España. Solicite presupuesto, envíe sus trabajos o consulte plazos.
@@ -26,7 +56,7 @@ export default function Contacto() {
       </section>
 
       <section className="py-12 sm:py-16 md:py-24 w-full min-w-0">
-        <div className="max-w-content-wide mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 w-full min-w-0">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 w-full min-w-0">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
             <div className="lg:col-span-1 space-y-5 sm:space-y-6 min-w-0">
               <div className="flex items-start gap-3 sm:gap-4">
@@ -93,6 +123,12 @@ export default function Contacto() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+                    {error && (
+                      <div className="flex items-start gap-2 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
+                        <AlertCircle size={18} className="flex-shrink-0 mt-0.5" />
+                        <span>{error}</span>
+                      </div>
+                    )}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1">Nombre *</label>
@@ -140,9 +176,10 @@ export default function Contacto() {
                     </div>
                     <button
                       type="submit"
-                      className="inline-flex items-center gap-2 bg-dental-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-dental-700 transition-colors"
+                      disabled={sending}
+                      className="inline-flex items-center gap-2 bg-dental-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-dental-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
                     >
-                      Enviar mensaje
+                      {sending ? 'Enviando…' : 'Enviar mensaje'}
                       <Send size={18} />
                     </button>
                   </form>

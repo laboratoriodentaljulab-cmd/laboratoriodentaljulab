@@ -26,8 +26,8 @@ export default function Carousel({ images = [], interval = 5000, className = '' 
 
   return (
     <section className={`w-full min-w-0 ${className}`}>
-      <div className="max-w-content-wide mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-        <div className="relative rounded-2xl overflow-hidden shadow-xl shadow-slate-300/40 ring-1 ring-slate-200/80 aspect-[16/9] min-h-[220px] sm:min-h-[300px] md:min-h-[360px] bg-slate-200">
+      <div className="w-full px-0">
+        <div className="relative overflow-hidden aspect-[21/9] min-h-[160px] sm:min-h-[200px] md:min-h-[260px] bg-slate-200">
           {current ? (
             <img
               src={current}

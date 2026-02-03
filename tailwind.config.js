@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       maxWidth: {
-        'content': '80rem',   /* 1280px - más ancho que 6xl */
-        'content-wide': '90rem', /* 1440px */
+        'content': '80rem',      /* 1280px */
+        'content-wide': '72rem', /* 1152px - ancho del contenido, centrado (como 6xl) */
       },
       colors: {
         dental: {

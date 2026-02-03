@@ -22,4 +22,8 @@
   .container-padding {
     @apply px-4 sm:px-6 lg:px-8;
   }
+  /* Ancho del contenido: 72rem (1152px), centrado en todas las páginas. */
+  .container-content {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 w-full min-w-0;
+  }
 }

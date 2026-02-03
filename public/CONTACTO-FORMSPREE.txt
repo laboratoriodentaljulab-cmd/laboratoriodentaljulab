@@ -1,0 +1,22 @@
+CONFIGURAR FORMULARIO DE CONTACTO (que los mensajes lleguen a tu correo)
+
+1. Entra en https://formspree.io (es gratis).
+2. Regístrate o inicia sesión.
+3. Crea un nuevo formulario ("New form").
+4. En "Email" pon tu correo de Hostinger con tu dominio, por ejemplo:
+   info@laboratoriodentaljulab.es
+   (o el que uses: contacto@, etc.)
+5. Formspree te dará un "Form endpoint" como:
+   https://formspree.io/f/xyzabcde
+   El ID es la parte final: xyzabcde
+6. En Vercel:
+   - Ve a tu proyecto → Settings → Environment Variables
+   - Añade una variable:
+     Name:  VITE_FORMSPREE_ID
+     Value: (pega aquí el ID, ej. xyzabcde)
+   - Marca Production (y Preview si quieres)
+   - Guarda y haz un nuevo Deploy
+7. Los mensajes del formulario llegarán a ese correo.
+
+Para probar en local: crea un archivo .env en la raíz del proyecto con:
+VITE_FORMSPREE_ID=tu_id_aqui

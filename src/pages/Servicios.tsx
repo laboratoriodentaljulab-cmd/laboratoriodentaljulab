@@ -76,7 +76,7 @@ export default function Servicios() {
     <>
       <section className="relative bg-gradient-to-br from-dental-600 to-dental-800 text-white py-14 sm:py-20 md:py-24 w-full min-w-0 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.12)_0%,_transparent_50%)]" />
-        <div className="max-w-content-wide mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 text-center relative">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 text-center relative">
           <p className="text-dental-200 text-sm font-semibold uppercase tracking-wider">Catálogo</p>
           <h1 className="mt-2 text-3xl sm:text-4xl md:text-5xl font-bold">
             Servicios del laboratorio
@@ -88,7 +88,7 @@ export default function Servicios() {
       </section>
 
       <section className="py-12 sm:py-16 md:py-20 w-full min-w-0">
-        <div className="max-w-content-wide mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 w-full min-w-0">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 w-full min-w-0">
           <div className="space-y-3">
             {categorias.map((cat) => {
               const isOpen = abierto === cat.id
@@ -138,7 +138,7 @@ export default function Servicios() {
       </section>
 
       <section className="py-12 sm:py-16 bg-slate-50 w-full min-w-0">
-        <div className="max-w-content-wide mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <p className="text-center text-slate-600 text-sm sm:text-base">
             Todos los trabajos se realizan bajo prescripción clínica. Para plazos y condiciones, contacte con nosotros.
           </p>
