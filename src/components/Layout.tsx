@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X, Phone, MapPin, Instagram, Facebook } from 'lucide-react'
 
-/* WhatsApp: número móvil España (+34). Enlace abre chat en WhatsApp. */
+/* WhatsApp: número móvil España (+34). Enlace abre chat con mensaje inicial. */
 const WHATSAPP_NUMERO = '34679818346'
 const WHATSAPP_DISPLAY = '+34 679 81 83 46'
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMERO}`
+const WHATSAPP_MENSAJE_INICIAL = '¡Hola! Me gustaría solicitar información sobre los servicios del laboratorio dental JULAB S.L. (ortopedia maxilar y aparatos funcionales).'
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(WHATSAPP_MENSAJE_INICIAL)}`
 
 /* Enlaces de redes sociales (sustituir # por tus URLs cuando los tengas) */
 const REDES_SOCIALES = {

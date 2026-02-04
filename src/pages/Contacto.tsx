@@ -122,13 +122,19 @@ export default function Contacto() {
                     <p className="text-slate-600 mt-2">Le contactaremos en breve.</p>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+                  <form
+                    action="https://formspree.io/f/mgozgelb"
+                    method="POST"
+                    onSubmit={handleSubmit}
+                    className="space-y-4 sm:space-y-5"
+                  >
                     {error && (
                       <div className="flex items-start gap-2 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
                         <AlertCircle size={18} className="flex-shrink-0 mt-0.5" />
                         <span>{error}</span>
                       </div>
                     )}
+                    <input type="hidden" name="_subject" value="Contacto JULAB S.L. - Web" />
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1">Nombre *</label>
