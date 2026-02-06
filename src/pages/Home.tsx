@@ -3,9 +3,9 @@ import { Beaker, Shield, MessageSquare, Scale, LayoutList, Phone } from 'lucide-
 import Carousel from '../components/Carousel'
 
 const carouselImages: string[] = [
-  '/carrusel/c1.jpg',
-  '/carrusel/c2.jpg',
-  '/carrusel/c3.jpg',
+  '/carrusel/c1.png',
+  '/carrusel/c2.png',
+  '/carrusel/c3.png',
 ]
 
 export default function Home() {
