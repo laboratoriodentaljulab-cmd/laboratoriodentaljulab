@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ChevronLeft, ChevronRight, ImageIcon } from 'lucide-react'
 
 interface CarouselProps {
@@ -8,6 +9,7 @@ interface CarouselProps {
 }
 
 export default function Carousel({ images = [], interval = 5000, className = '' }: CarouselProps) {
+  const { t } = useTranslation()
   const [index, setIndex] = useState(0)
 
   const slides = images.length > 0 ? images : [null]
@@ -41,9 +43,9 @@ export default function Carousel({ images = [], interval = 5000, className = '' 
                 <ImageIcon size={40} className="text-dental-400" />
               </div>
               <p className="text-center font-medium text-slate-600 max-w-sm">
-                Añade imágenes en la carpeta <code className="text-sm bg-white/80 px-2 py-0.5 rounded">public/carrusel</code>
+                {t('carousel.placeholder')} <code className="text-sm bg-white/80 px-2 py-0.5 rounded">{t('carousel.placeholderCode')}</code>
               </p>
-              <p className="text-sm text-slate-500">slide1.jpg, slide2.jpg, …</p>
+              <p className="text-sm text-slate-500">{t('carousel.placeholderHint')}</p>
             </div>
           )}
 
@@ -53,7 +55,7 @@ export default function Carousel({ images = [], interval = 5000, className = '' 
                 type="button"
                 onClick={() => go(-1)}
                 className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 shadow-lg flex items-center justify-center text-slate-700 hover:bg-white hover:text-dental-600 transition-colors focus:outline-none focus:ring-2 focus:ring-dental-500 z-10"
-                aria-label="Anterior"
+                aria-label={t('carousel.prev')}
               >
                 <ChevronLeft size={24} />
               </button>
@@ -61,7 +63,7 @@ export default function Carousel({ images = [], interval = 5000, className = '' 
                 type="button"
                 onClick={() => go(1)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 shadow-lg flex items-center justify-center text-slate-700 hover:bg-white hover:text-dental-600 transition-colors focus:outline-none focus:ring-2 focus:ring-dental-500 z-10"
-                aria-label="Siguiente"
+                aria-label={t('carousel.next')}
               >
                 <ChevronRight size={24} />
               </button>
@@ -75,7 +77,7 @@ export default function Carousel({ images = [], interval = 5000, className = '' 
                     className={`w-2.5 h-2.5 rounded-full transition-all ${
                       i === index ? 'bg-white scale-110 shadow' : 'bg-white/60 hover:bg-white/80'
                     }`}
-                    aria-label={`Ir a imagen ${i + 1}`}
+                    aria-label={`${t('carousel.goTo')} ${i + 1}`}
                   />
                 ))}
               </div>

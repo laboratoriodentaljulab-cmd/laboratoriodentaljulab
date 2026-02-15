@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Phone, MapPin, Instagram, Facebook } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
+import { Menu, X, Phone, MapPin, Instagram, Facebook, Globe } from 'lucide-react'
+import { supportedLanguages, setStoredLanguage, type SupportedLanguage } from '../i18n'
 
 /* WhatsApp: número móvil España (+34). Enlace abre chat con mensaje inicial. */
 const WHATSAPP_NUMERO = '34679818346'
 const WHATSAPP_DISPLAY = '+34 679 81 83 46'
-const WHATSAPP_MENSAJE_INICIAL = '¡Hola! Me gustaría solicitar información sobre los servicios del laboratorio dental JULAB S.L. (ortopedia maxilar y aparatos funcionales).'
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(WHATSAPP_MENSAJE_INICIAL)}`
 
 /* Enlaces de redes sociales (sustituir # por tus URLs cuando los tengas) */
 const REDES_SOCIALES = {
@@ -52,15 +52,25 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
+  const { t, i18n } = useTranslation()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [langOpen, setLangOpen] = useState(false)
   const location = useLocation()
 
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(t('whatsapp.message'))}`
+
   const navLinks = [
-    { to: '/', label: 'Inicio' },
-    { to: '/servicios', label: 'Servicios' },
-    { to: '/nosotros', label: 'Nosotros' },
-    { to: '/contacto', label: 'Contacto' },
+    { to: '/', label: t('nav.inicio') },
+    { to: '/servicios', label: t('nav.servicios') },
+    { to: '/nosotros', label: t('nav.nosotros') },
+    { to: '/contacto', label: t('nav.contacto') },
   ]
+
+  const changeLanguage = (code: SupportedLanguage) => {
+    i18n.changeLanguage(code)
+    setStoredLanguage(code)
+    setLangOpen(false)
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -71,12 +81,12 @@ export default function Layout({ children }: LayoutProps) {
               <img src="/logo/logo.png" alt="JULAB S.L." className="h-10 sm:h-14 md:h-20 w-auto max-h-16 sm:max-h-[5rem] object-contain object-left" />
             </Link>
 
-            <nav className="hidden md:flex items-center gap-8 md:mr-20 lg:mr-24 xl:mr-28">
+            <nav className="hidden md:flex items-center gap-6 lg:gap-8 md:mr-8 lg:mr-10 xl:mr-12">
               {navLinks.map(({ to, label }) => (
                 <Link
                   key={to}
                   to={to}
-                  className={`font-medium transition-colors ${
+                  className={`font-medium transition-colors whitespace-nowrap ${
                     location.pathname === to ? 'text-dental-600' : 'text-slate-600 hover:text-dental-600'
                   }`}
                 >
@@ -91,7 +101,7 @@ export default function Layout({ children }: LayoutProps) {
                 <span>968 93 11 39</span>
               </a>
               <a
-                href={WHATSAPP_URL}
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#25D366] text-white px-4 py-2.5 rounded-lg font-medium hover:bg-[#20BD5A] transition-colors text-sm h-10 whitespace-nowrap shrink-0"
@@ -105,15 +115,44 @@ export default function Layout({ children }: LayoutProps) {
                 to="/contacto"
                 className="inline-flex items-center justify-center bg-dental-600 text-white px-4 py-2.5 rounded-lg font-medium hover:bg-dental-700 transition-colors text-sm h-10 whitespace-nowrap shrink-0"
               >
-                Solicitar presupuesto
+                {t('nav.solicitarPresupuesto')}
               </Link>
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setLangOpen(!langOpen)}
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-800 text-sm font-medium uppercase whitespace-nowrap"
+                  aria-label="Idioma"
+                  aria-expanded={langOpen}
+                >
+                  <Globe size={18} />
+                  <span>{i18n.language}</span>
+                </button>
+                {langOpen && (
+                  <>
+                    <div className="fixed inset-0 z-40" aria-hidden onClick={() => setLangOpen(false)} />
+                    <div className="absolute right-0 top-full mt-1 py-1 bg-white border border-slate-200 rounded-lg shadow-lg z-50 min-w-[8rem]">
+                      {supportedLanguages.map(({ code, label }) => (
+                        <button
+                          key={code}
+                          type="button"
+                          onClick={() => changeLanguage(code)}
+                          className={`w-full text-left px-4 py-2 text-sm hover:bg-slate-50 rounded-none first:rounded-t-lg last:rounded-b-lg ${i18n.language === code ? 'bg-dental-50 text-dental-700 font-medium' : 'text-slate-700'}`}
+                        >
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
 
             <button
               type="button"
               onClick={() => setMenuOpen(!menuOpen)}
               className="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100"
-              aria-label="Menú"
+              aria-label={t('nav.menu')}
             >
               {menuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -123,6 +162,19 @@ export default function Layout({ children }: LayoutProps) {
         {menuOpen && (
           <div className="md:hidden border-t border-slate-200 bg-white">
             <div className="px-4 py-4 flex flex-col gap-2">
+              <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
+                <Globe size={18} className="text-slate-500" />
+                {supportedLanguages.map(({ code, label }) => (
+                  <button
+                    key={code}
+                    type="button"
+                    onClick={() => changeLanguage(code)}
+                    className={`px-3 py-1.5 rounded-lg text-sm font-medium ${i18n.language === code ? 'bg-dental-100 text-dental-700' : 'text-slate-600 hover:bg-slate-100'}`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
               {navLinks.map(({ to, label }) => (
                 <Link
                   key={to}
@@ -140,7 +192,7 @@ export default function Layout({ children }: LayoutProps) {
                 968 93 11 39
               </a>
               <a
-                href={WHATSAPP_URL}
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMenuOpen(false)}
@@ -155,7 +207,7 @@ export default function Layout({ children }: LayoutProps) {
                 onClick={() => setMenuOpen(false)}
                 className="bg-dental-600 text-white py-3 px-4 rounded-lg font-medium text-center"
               >
-                Solicitar presupuesto
+                {t('nav.solicitarPresupuesto')}
               </Link>
             </div>
           </div>
@@ -169,10 +221,10 @@ export default function Layout({ children }: LayoutProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <img src="/logo/logo.png" alt="JULAB S.L." className="h-8 w-auto object-contain brightness-0 invert opacity-90" />
-              <p className="mt-2 text-sm text-slate-400 break-words">Laboratorio dental especializado · Ortopedia maxilar · Aparatos funcionales. Murcia, España.</p>
+              <p className="mt-2 text-sm text-slate-400 break-words">{t('footer.description')}</p>
             </div>
             <div>
-              <h3 className="font-semibold text-white mb-3">Enlaces</h3>
+              <h3 className="font-semibold text-white mb-3">{t('footer.enlaces')}</h3>
               <ul className="space-y-2">
                 {navLinks.map(({ to, label }) => (
                   <li key={to}>
@@ -184,7 +236,7 @@ export default function Layout({ children }: LayoutProps) {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold text-white mb-3">Contacto</h3>
+              <h3 className="font-semibold text-white mb-3">{t('footer.contacto')}</h3>
               <a href="tel:+34968931139" className="flex items-center gap-2 hover:text-dental-400 transition-colors">
                 <Phone size={18} />
                 968 93 11 39
@@ -194,7 +246,7 @@ export default function Layout({ children }: LayoutProps) {
                 689 41 18 06
               </a>
               <a
-                href={WHATSAPP_URL}
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 mt-2 hover:text-dental-400 transition-colors"
@@ -208,7 +260,7 @@ export default function Layout({ children }: LayoutProps) {
                 <span>Plaza Puerta Nueva, 3 · 4ª Escalera, Entresuelo A · 30001 Murcia</span>
               </div>
               <div className="mt-4">
-                <h4 className="font-semibold text-white mb-2 text-sm">Redes sociales</h4>
+                <h4 className="font-semibold text-white mb-2 text-sm">{t('footer.redesSociales')}</h4>
                 <div className="flex gap-3">
                   <a
                     href={REDES_SOCIALES.instagram}
@@ -242,7 +294,7 @@ export default function Layout({ children }: LayoutProps) {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-slate-700 text-center text-sm text-slate-400 break-words px-2">
-            © {new Date().getFullYear()} JULAB S.L. Laboratorio Dental. Todos los derechos reservados.
+            © {new Date().getFullYear()} {t('footer.copyright')}
           </div>
         </div>
       </footer>
