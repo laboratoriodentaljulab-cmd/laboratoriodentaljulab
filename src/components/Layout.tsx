@@ -98,7 +98,7 @@ export default function Layout({ children }: LayoutProps) {
             <div className="hidden md:flex items-center gap-3">
               <a href="tel:+34968931139" className="flex items-center gap-2 text-slate-600 hover:text-dental-600 text-sm whitespace-nowrap h-10">
                 <Phone size={18} />
-                <span>968 93 11 39</span>
+                <span>+34 968 93 11 39</span>
               </a>
               <a
                 href={whatsappUrl}
@@ -189,7 +189,7 @@ export default function Layout({ children }: LayoutProps) {
               ))}
               <a href="tel:+34968931139" className="py-3 px-4 flex items-center gap-2 text-slate-600">
                 <Phone size={20} />
-                968 93 11 39
+                +34 968 93 11 39
               </a>
               <a
                 href={whatsappUrl}
@@ -239,11 +239,11 @@ export default function Layout({ children }: LayoutProps) {
               <h3 className="font-semibold text-white mb-3">{t('footer.contacto')}</h3>
               <a href="tel:+34968931139" className="flex items-center gap-2 hover:text-dental-400 transition-colors">
                 <Phone size={18} />
-                968 93 11 39
+                +34 968 93 11 39
               </a>
               <a href="tel:+34689411806" className="flex items-center gap-2 mt-2 hover:text-dental-400 transition-colors">
                 <Phone size={18} />
-                689 41 18 06
+                +34 689 41 18 06
               </a>
               <a
                 href={whatsappUrl}

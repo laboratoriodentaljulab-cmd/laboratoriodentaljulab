@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Phone, MapPin, Send, Clock, AlertCircle } from 'lucide-react'
+import { Phone, MapPin, Send, Clock, AlertCircle, Mail } from 'lucide-react'
 
 const TELEFONO = '968 93 11 39'
 const MOVIL = '689 41 18 06'
+const TELEFONO_DISPLAY = '+34 968 93 11 39'
+const MOVIL_DISPLAY = '+34 689 41 18 06'
+const EMAIL_DIRECTO = 'julio.acevedo@laboratoriodentaljulab.es'
 const MAPA_URL = 'https://www.google.com/maps?q=Plaza+Puerta+Nueva+3,+30001+Murcia,+España&output=embed'
 
 const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID || 'mgozgelb'
@@ -16,8 +19,9 @@ export default function Contacto() {
 
   const DIRECCION = t('contacto.direccionCompleta')
   const contactos = [
-    { icon: Phone, labelKey: 'contacto.telefono' as const, value: TELEFONO, href: `tel:+34${TELEFONO.replace(/\s/g, '')}` },
-    { icon: Phone, labelKey: 'contacto.movil' as const, value: MOVIL, href: `tel:+34${MOVIL.replace(/\s/g, '')}` },
+    { icon: Phone, labelKey: 'contacto.telefono' as const, value: TELEFONO_DISPLAY, href: `tel:+34${TELEFONO.replace(/\s/g, '')}` },
+    { icon: Phone, labelKey: 'contacto.movil' as const, value: MOVIL_DISPLAY, href: `tel:+34${MOVIL.replace(/\s/g, '')}` },
+    { icon: Mail, labelKey: 'contacto.correoDirecto' as const, value: EMAIL_DIRECTO, href: `mailto:${EMAIL_DIRECTO}` },
     { icon: MapPin, labelKey: 'contacto.direccion' as const, value: DIRECCION, href: 'https://www.google.com/maps/search/Plaza+Puerta+Nueva+3+30001+Murcia', isLink: true },
     { icon: Clock, labelKey: 'contacto.horario' as const, value: t('contacto.horarioValor'), href: null },
   ]
